@@ -8,6 +8,7 @@ using R00ster.Services.Interfaces.MainWindowServices;
 using R00ster.Services.Interfaces.Other;
 using R00ster.Services.Realization.FileReaders;
 using R00ster.Services.Realization.Other;
+using R00ster.ViewModels;
 
 namespace R00ster.Helpers
 {   
@@ -26,7 +27,7 @@ namespace R00ster.Helpers
         internal static IServiceCollection RegisterServices(this IServiceCollection services) 
         {
             //services
-            services.AddScoped<IMainWindowService,MainWindowService>();
+            services.AddSingleton<IMainWindowService,MainWindowService>();
             services.AddScoped<IJokesExcelReader, JokesExcelReader>();
             services.AddScoped<IJokeDatabaseSaver, JokeDatabaseSaver>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -39,6 +40,9 @@ namespace R00ster.Helpers
             //windows
             services.AddSingleton<MainWindow>();
 
+            //
+            services.AddSingleton<MainWindowVM>();
+            
             //apps
             services.AddSingleton<App>();
 
