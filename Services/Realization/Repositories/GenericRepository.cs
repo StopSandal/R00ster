@@ -18,7 +18,8 @@ namespace R00ster.Services.Realization.Repositories
         {
             var query = _context.Set<T>().AsQueryable();
 
-            query = query.Where(filter);
+            if(filter != null)
+                query = query.Where(filter);
 
             return await query.CountAsync();
 

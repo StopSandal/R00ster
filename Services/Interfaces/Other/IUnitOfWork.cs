@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace R00ster.Services.Interfaces.Other
 {
-    internal interface IUnitOfWork
+    public interface IUnitOfWork
     {
         public IRepositoryAsync<Joke> JokesRepository { get; }
     }
