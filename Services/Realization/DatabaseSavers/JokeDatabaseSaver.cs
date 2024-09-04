@@ -4,6 +4,9 @@ using R00ster.Services.Interfaces.Other;
 
 namespace R00ster.Services.Realization.DatabaseSavers
 {
+    /// <summary>
+    /// A realization of interface <see cref="IJokeDatabaseSaver"./>
+    /// </summary>
     internal class JokeDatabaseSaver : IJokeDatabaseSaver
     {
         private const int BunchSize = 2048;
@@ -15,7 +18,7 @@ namespace R00ster.Services.Realization.DatabaseSavers
             _unitOfWork = unitOfWork;
 
         }
-
+        /// <inheritdoc/>
         public async IAsyncEnumerable<int> SaveToDatabaseAsync(IAsyncEnumerable<Joke> items)
         {
 

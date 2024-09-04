@@ -6,6 +6,9 @@ using R00ster.Services.Realization.Repositories;
 
 namespace R00ster.Services.Realization.Other
 {
+    /// <summary>
+    /// A realization of interface <see cref="IUnitOfWork"./>
+    /// </summary>
     internal class UnitOfWork : IUnitOfWork
     {
         private readonly R00sterContext _context;

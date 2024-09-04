@@ -5,6 +5,9 @@ using System.Diagnostics;
 
 namespace R00ster.Services.Realization.MainWindowServices
 {
+    /// <summary>
+    /// A realization of interface <see cref="IMainWindowService"./>
+    /// </summary>
     internal class MainWindowService : IMainWindowService
     {
         IJokesExcelReader _excelReader;
@@ -15,7 +18,7 @@ namespace R00ster.Services.Realization.MainWindowServices
             _excelReader = excelReader;
             _databaseBulkSaver = databaseBulkSaver;
         }
-
+        /// <inheritdoc/>
         public async Task<int> ReadExcelFileWithDbSaveAsync(string pathToFile)
         {
             var TimeBefore = DateTime.Now;

@@ -42,7 +42,7 @@ namespace R00ster.Helpers
             //windows
             services.AddSingleton<MainWindow>();
 
-            //
+            // View Models
             services.AddSingleton<MainWindowVM>();
 
             //apps

@@ -1,5 +1,11 @@
 ﻿namespace R00ster.Services.Interfaces.FileReaders
 {
+    /// <summary>
+    /// Defines the contract for a service that reads data from a file and returns the data as instances of the specified class type.
+    /// </summary>
+    /// <typeparam name="TClass">
+    /// The type of the class that the file data will be deserialized into.
+    /// </typeparam>
     internal interface IFileReader<TClass> where TClass : class, new()
     {
         /// <summary>

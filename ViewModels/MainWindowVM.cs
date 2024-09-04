@@ -7,6 +7,9 @@ using System.Windows.Input;
 
 namespace R00ster.ViewModels
 {
+    /// <summary>
+    /// View model class for data context of main window
+    /// </summary>
     public class MainWindowVM : INotifyPropertyChanged
     {
         private const string ExcelFileFilter = "Excel files (*.xlsx)|*.xlsx";
@@ -78,6 +81,9 @@ namespace R00ster.ViewModels
             }
         }
 
+        /// <summary>
+        /// Refresh UI of app after database changes
+        /// </summary>
         private async void RefreshUIElementsAfterDbChanges()
         {
             TotalRecordsLabelText = (await _unitOfWork.JokesRepository.GetCountAsync()).ToString();

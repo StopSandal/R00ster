@@ -6,8 +6,12 @@ using System.IO;
 
 namespace R00ster.Services.Realization.FileReaders
 {
+    /// <summary>
+    /// A realization of interface <see cref="IJokesExcelReader"./>
+    /// </summary>
     internal class JokesExcelReader : IJokesExcelReader
     {
+        /// <inheritdoc/>
         public async IAsyncEnumerable<Joke> ReadAsync(string pathToFile)
         {
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
