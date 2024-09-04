@@ -8,6 +8,7 @@ using R00ster.Services.Interfaces.MainWindowServices;
 using R00ster.Services.Interfaces.Other;
 using R00ster.Services.Realization.DatabaseSavers;
 using R00ster.Services.Realization.FileReaders;
+using R00ster.Services.Realization.MainWindowServices;
 using R00ster.Services.Realization.Other;
 using R00ster.ViewModels;
 
@@ -25,10 +26,10 @@ namespace R00ster.Helpers
         /// </summary>
         /// <param name="services">A service collection</param>
         /// <returns>Returns a service collection with registered services</returns>
-        internal static IServiceCollection RegisterServices(this IServiceCollection services) 
+        internal static IServiceCollection RegisterServices(this IServiceCollection services)
         {
             //services
-            services.AddScoped<IMainWindowService,MainWindowService>();
+            services.AddScoped<IMainWindowService, MainWindowService>();
             services.AddScoped<IJokesExcelReader, JokesExcelReader>();
             services.AddScoped<IJokeDatabaseSaver, JokeDatabaseSaver>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -43,7 +44,7 @@ namespace R00ster.Helpers
 
             //
             services.AddSingleton<MainWindowVM>();
-            
+
             //apps
             services.AddSingleton<App>();
 

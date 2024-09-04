@@ -1,15 +1,9 @@
-﻿using R00ster.Entities;
-using R00ster.Services.Interfaces.DatabaseSavers;
+﻿using R00ster.Services.Interfaces.DatabaseSavers;
 using R00ster.Services.Interfaces.FileReaders;
-using R00ster.Services.Interfaces.Other;
-using System;
-using System.Collections.Generic;
+using R00ster.Services.Interfaces.MainWindowServices;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace R00ster.Services.Interfaces.MainWindowServices
+namespace R00ster.Services.Realization.MainWindowServices
 {
     internal class MainWindowService : IMainWindowService
     {

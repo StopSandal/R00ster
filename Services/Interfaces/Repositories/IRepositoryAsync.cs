@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 namespace R00ster.Services.Interfaces.Repositories
 {
@@ -13,6 +8,6 @@ namespace R00ster.Services.Interfaces.Repositories
     public interface IRepositoryAsync<T> where T : class
     {
         public Task InsertRangeAsync(IEnumerable<T> items);
-        public Task<int> GetCountAsync(Expression<Func<T,bool>>? filter = null);
+        public Task<int> GetCountAsync(Expression<Func<T, bool>>? filter = null);
     }
 }

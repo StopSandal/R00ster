@@ -9,7 +9,7 @@ namespace R00ster.Commands
     {
         private readonly Action<object> _execute;
         private readonly Predicate<object> _canExecute;
-    
+
         /// <summary>
         /// Initializes a new instance of the RelayCommand class.
         /// </summary>
@@ -20,7 +20,7 @@ namespace R00ster.Commands
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
         }
-    
+
         /// <summary>
         /// Determines whether the command can execute in its current state.
         /// </summary>
@@ -30,7 +30,7 @@ namespace R00ster.Commands
         {
             return _canExecute?.Invoke(parameter) ?? true;
         }
-    
+
         /// <summary>
         /// Executes the command.
         /// </summary>
@@ -39,7 +39,7 @@ namespace R00ster.Commands
         {
             _execute(parameter);
         }
-    
+
         /// <summary>
         /// Occurs when changes occur that affect whether the command should execute.
         /// </summary>

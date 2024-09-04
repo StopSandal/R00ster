@@ -3,12 +3,6 @@ using R00ster.Entities;
 using R00ster.Services.Interfaces.Other;
 using R00ster.Services.Interfaces.Repositories;
 using R00ster.Services.Realization.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Navigation;
 
 namespace R00ster.Services.Realization.Other
 {
@@ -23,6 +17,6 @@ namespace R00ster.Services.Realization.Other
 
         private IRepositoryAsync<Joke> _JokesRepository;
 
-        public IRepositoryAsync<Joke> JokesRepository { get { return _JokesRepository ??= _JokesRepository = new GenericRepository<Joke>(_context); }   }
+        public IRepositoryAsync<Joke> JokesRepository { get { return _JokesRepository ??= _JokesRepository = new GenericRepository<Joke>(_context); } }
     }
 }

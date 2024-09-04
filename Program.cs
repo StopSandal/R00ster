@@ -21,7 +21,7 @@ namespace R00ster
                 .Build();
 
             var host = Host.CreateDefaultBuilder()
-                .ConfigureServices( services =>
+                .ConfigureServices(services =>
                 {
                     services.RegisterServices();
                 })

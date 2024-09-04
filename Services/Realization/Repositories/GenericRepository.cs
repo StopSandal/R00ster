@@ -1,6 +1,6 @@
-﻿using R00ster.Services.Interfaces.Repositories;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using R00ster.EF;
+using R00ster.Services.Interfaces.Repositories;
 
 namespace R00ster.Services.Realization.Repositories
 {
@@ -18,7 +18,7 @@ namespace R00ster.Services.Realization.Repositories
         {
             var query = _context.Set<T>().AsQueryable();
 
-            if(filter != null)
+            if (filter != null)
                 query = query.Where(filter);
 
             return await query.CountAsync();

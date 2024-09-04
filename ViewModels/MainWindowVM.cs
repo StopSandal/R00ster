@@ -1,9 +1,7 @@
 ﻿using R00ster.Commands;
 using R00ster.Services.Interfaces.MainWindowServices;
 using R00ster.Services.Interfaces.Other;
-using R00ster.Services.Realization.Other;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -64,7 +62,7 @@ namespace R00ster.ViewModels
                 var filePath = openFileDialog.FileName;
                 try
                 {
-                    
+
                     var handledCount = await _mainWindowService.ReadExcelFileWithDbSaveAsync(filePath);
 
                     MessageBox.Show($"Total read : {handledCount}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Question);
@@ -83,7 +81,7 @@ namespace R00ster.ViewModels
         private async void RefreshUIElementsAfterDbChanges()
         {
             TotalRecordsLabelText = (await _unitOfWork.JokesRepository.GetCountAsync()).ToString();
-       
+
         }
 
         protected void OnPropertyChanged(string propertyName)
