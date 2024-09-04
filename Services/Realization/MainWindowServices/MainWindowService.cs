@@ -13,12 +13,12 @@ namespace R00ster.Services.Interfaces.MainWindowServices
 {
     internal class MainWindowService : IMainWindowService
     {
-        IJokesExcelReader _ExcelReader;
+        IJokesExcelReader _excelReader;
         IJokeDatabaseSaver _databaseBulkSaver;
 
         public MainWindowService(IJokesExcelReader excelReader, IJokeDatabaseSaver databaseBulkSaver)
         {
-            _ExcelReader = excelReader;
+            _excelReader = excelReader;
             _databaseBulkSaver = databaseBulkSaver;
         }
 
@@ -27,7 +27,7 @@ namespace R00ster.Services.Interfaces.MainWindowServices
             var TimeBefore = DateTime.Now;
             var totalSavedCount = 0;
 
-            var jokesList = _ExcelReader.ReadAsync(pathToFile);
+            var jokesList = _excelReader.ReadAsync(pathToFile);
             var totalCountList = _databaseBulkSaver.SaveToDatabaseAsync(jokesList);
 
             await foreach (var item in totalCountList)

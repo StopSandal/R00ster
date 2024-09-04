@@ -8,22 +8,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace R00ster.Services.Realization.Other
+namespace R00ster.Services.Realization.DatabaseSavers
 {
     internal class JokeDatabaseSaver : IJokeDatabaseSaver
     {
-        private const int BunchSize = 128;
+        private const int BunchSize = 2048;
         readonly IUnitOfWork _unitOfWork;
+        List<Joke> _bunch = new List<Joke>(BunchSize);
 
         public JokeDatabaseSaver(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            
+
         }
 
         public async IAsyncEnumerable<int> SaveToDatabaseAsync(IAsyncEnumerable<Joke> items)
         {
-            var _bunch = new List<Joke>(BunchSize);
+
 
             await foreach (var item in items)
             {
@@ -41,6 +42,7 @@ namespace R00ster.Services.Realization.Other
                 await _unitOfWork.JokesRepository.InsertRangeAsync(_bunch);
                 yield return _bunch.Count;
             }
+            _bunch.Clear();
         }
     }
 }

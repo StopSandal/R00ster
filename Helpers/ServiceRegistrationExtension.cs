@@ -6,12 +6,13 @@ using R00ster.Services.Interfaces.DatabaseSavers;
 using R00ster.Services.Interfaces.FileReaders;
 using R00ster.Services.Interfaces.MainWindowServices;
 using R00ster.Services.Interfaces.Other;
+using R00ster.Services.Realization.DatabaseSavers;
 using R00ster.Services.Realization.FileReaders;
 using R00ster.Services.Realization.Other;
 using R00ster.ViewModels;
 
 namespace R00ster.Helpers
-{   
+{
     /// <summary>
     /// Class that responsible for service registration for the application.
     /// </summary>

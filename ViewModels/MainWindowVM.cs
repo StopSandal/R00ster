@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using R00ster.Commands;
 using R00ster.Services.Interfaces.MainWindowServices;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -21,7 +21,7 @@ namespace R00ster.ViewModels
         {
             _mainWindowService = mainWindowService;
 
-            ReadAndSaveExcelFileCommand = new RelayCommand(async () => await ReadAndSaveExcelFile());
+            ReadAndSaveExcelFileCommand = new RelayCommand(async _ => await ReadAndSaveExcelFile());
         }
 
 
@@ -35,16 +35,16 @@ namespace R00ster.ViewModels
                 Filter = ExcelFileFilter
             };
 
-
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            var result = openFileDialog.ShowDialog() == DialogResult.OK;
+            if (result)
             {
                 var filePath = openFileDialog.FileName;
                 try
                 {
-
+                    
                     var handledCount = await _mainWindowService.ReadExcelFileWithDbSaveAsync(filePath);
 
-                    MessageBox.Show($"Total readed : {handledCount}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    MessageBox.Show($"Total read : {handledCount}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 }
                 catch (Exception ex)
                 {
