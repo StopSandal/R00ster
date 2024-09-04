@@ -28,6 +28,7 @@ namespace R00ster.Services.Realization.Repositories
         public async Task InsertRangeAsync(IEnumerable<T> items)
         {
             await _context.AddRangeAsync(items);
+            _context.SaveChanges();
         }
     }
 }
