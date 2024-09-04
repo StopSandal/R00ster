@@ -27,7 +27,7 @@ namespace R00ster.Helpers
         internal static IServiceCollection RegisterServices(this IServiceCollection services) 
         {
             //services
-            services.AddSingleton<IMainWindowService,MainWindowService>();
+            services.AddScoped<IMainWindowService,MainWindowService>();
             services.AddScoped<IJokesExcelReader, JokesExcelReader>();
             services.AddScoped<IJokeDatabaseSaver, JokeDatabaseSaver>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
