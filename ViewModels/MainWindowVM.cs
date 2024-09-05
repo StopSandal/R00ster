@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using R00ster.Commands;
 using R00ster.Constants;
+using R00ster.Helpers;
 using R00ster.Services.Interfaces.MainWindowServices;
 using R00ster.Services.Interfaces.Other;
 using System.ComponentModel;
@@ -38,6 +39,8 @@ namespace R00ster.ViewModels
         //commands
         public ICommand ReadAndSaveExcelFileCommand { get; }
         public ICommand NotifyByEmailCommand { get; }
+        public ICommand SetOnAutostartCommand { get; }
+        public ICommand SetOffAutostartCommand { get; }
 
 
         public MainWindowVM(IMainWindowService mainWindowService, IUnitOfWork unitOfWork)
@@ -49,6 +52,8 @@ namespace R00ster.ViewModels
 
             ReadAndSaveExcelFileCommand = new RelayCommand(async _ => await ReadAndSaveExcelFile());
             NotifyByEmailCommand = new RelayCommand(async _ => await NotifyUser());
+            SetOnAutostartCommand = new RelayCommand(_ => SetOnBackgroundProcessStart());
+            SetOffAutostartCommand = new RelayCommand(_ => SetOffBackgroundProcessStart());
         }
 
 
@@ -103,6 +108,26 @@ namespace R00ster.ViewModels
         private async void InitUI()
         {
             await RefreshUIElementsAfterDbChanges();
+        }
+        private void SetOnBackgroundProcessStart()
+        {
+            if (StartupRegistryHelper.IsRegisteredInStartup())
+            {
+                MessageBox.Show($"Auto start is already exists.", "Fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            StartupRegistryHelper.RegisterInStartup();
+        }
+
+        private void SetOffBackgroundProcessStart()
+        {
+            if (!StartupRegistryHelper.IsRegisteredInStartup())
+            {
+                MessageBox.Show($"Auto start isn't exists.", "Fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            StartupRegistryHelper.UnregisterFromStartup();
         }
 
         /// <summary>

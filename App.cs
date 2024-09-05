@@ -16,8 +16,6 @@ namespace R00ster
         }
         protected override void OnStartup(StartupEventArgs e)
         {
-            StartupRegistryHelper.RegisterInStartup();
-
             mainWindow.Show();
             base.OnStartup(e);
         }

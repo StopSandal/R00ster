@@ -15,12 +15,13 @@ namespace R00ster.Helpers
 
         public static void RegisterInStartup()
         {
-            var baseDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            var exePath = Path.Combine(baseDir, $"{AppName}.exe");
-
             RegistryKey key = Registry.CurrentUser.OpenSubKey(RegistryPath, true);
+
             if (key.GetValue(AppName) == null)
             {
+                var baseDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                var exePath = Path.Combine(baseDir, $"{AppName}.exe");
+
                 key.SetValue(AppName, $"\"{exePath}\" --background");
             }
         }
@@ -33,6 +34,15 @@ namespace R00ster.Helpers
             {
                 key.DeleteValue(AppName);
             }
+        }
+        /// <summary>
+        /// Method to check is app background process is registered to auto start up.
+        /// </summary>
+        /// <returns>Returns true, if process is registered. Otherwise, false.</returns>
+        public static bool IsRegisteredInStartup()
+        {
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(RegistryPath, true);
+            return key.GetValue(AppName) != null;
         }
     }
 }
