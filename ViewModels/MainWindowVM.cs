@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using R00ster.Commands;
+using R00ster.Constants;
 using R00ster.Services.Interfaces.MainWindowServices;
 using R00ster.Services.Interfaces.Other;
 using System.ComponentModel;
@@ -14,10 +15,8 @@ namespace R00ster.ViewModels
     public class MainWindowVM : INotifyPropertyChanged
     {
         private const string ExcelFileFilter = "Excel files (*.xlsx)|*.xlsx";
-        private const string PathToUserEmail = "EmailSettings:UserEmail";
 
         public event PropertyChangedEventHandler PropertyChanged;
-
 
         private readonly IMainWindowService _mainWindowService;
         private readonly IUnitOfWork _unitOfWork;
@@ -46,7 +45,7 @@ namespace R00ster.ViewModels
             _mainWindowService = mainWindowService;
             _unitOfWork = unitOfWork;
 
-            RefreshUIElementsAfterDbChanges();
+            InitUI();
 
             ReadAndSaveExcelFileCommand = new RelayCommand(async _ => await ReadAndSaveExcelFile());
             NotifyByEmailCommand = new RelayCommand(async _ => await NotifyUser());
@@ -80,7 +79,7 @@ namespace R00ster.ViewModels
                 }
                 finally
                 {
-                    RefreshUIElementsAfterDbChanges();
+                    await RefreshUIElementsAfterDbChanges();
                 }
             }
         }
@@ -89,14 +88,10 @@ namespace R00ster.ViewModels
         {
             try
             {
-                var countResult = await _unitOfWork.JokesRepository.GetCountAsync();
+                var userEmail = Program.Config.GetValue<string>(SettingsPathConstants.PathToUserEmail);
 
-                var userEmail = Program.Config.GetValue<string>(PathToUserEmail);
+                await _mainWindowService.SendEmailMessage(userEmail);
 
-                await _mainWindowService.SendEmailMessage(
-                    userEmail
-                    , "Daily report"
-                    , $"Total row on {DateTime.Now} is {countResult}");
                 MessageBox.Show($"Message was successfully delivered to Email {userEmail}. Check spam folder.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex) 
@@ -105,10 +100,15 @@ namespace R00ster.ViewModels
             }
         }
 
+        private async void InitUI()
+        {
+            await RefreshUIElementsAfterDbChanges();
+        }
+
         /// <summary>
         /// Refresh UI of app after database changes
         /// </summary>
-        private async void RefreshUIElementsAfterDbChanges()
+        private async Task RefreshUIElementsAfterDbChanges()
         {
             TotalRecordsLabelText = (await _unitOfWork.JokesRepository.GetCountAsync()).ToString();
 

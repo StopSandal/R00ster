@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using R00ster.Helpers;
+using System.Windows;
 
 namespace R00ster
 {
@@ -15,6 +16,8 @@ namespace R00ster
         }
         protected override void OnStartup(StartupEventArgs e)
         {
+            StartupRegistryHelper.RegisterInStartup();
+
             mainWindow.Show();
             base.OnStartup(e);
         }

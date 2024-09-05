@@ -24,12 +24,22 @@ namespace R00ster
                 .ConfigureServices(services =>
                 {
                     services.RegisterServices();
+                    services.RegisterBackgroundServices();
                 })
                 .Build();
 
-            var app = host.Services.GetService<App>();
+            
+            var backgroundService = host.Services.GetRequiredService<IHostedService>();
+            backgroundService.StartAsync(default).GetAwaiter().GetResult();
 
-            app?.Run();
+            if (!args.Contains("--background"))
+            {
+                var app = host.Services.GetService<App>();
+
+                app?.Run();
+            }
+
+            host.Run();
         }
     }
 }

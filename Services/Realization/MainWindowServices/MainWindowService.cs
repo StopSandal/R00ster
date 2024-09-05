@@ -1,7 +1,9 @@
-﻿using R00ster.Services.Interfaces.DatabaseSavers;
+﻿using Microsoft.Extensions.Configuration;
+using R00ster.Services.Interfaces.DatabaseSavers;
 using R00ster.Services.Interfaces.FileReaders;
 using R00ster.Services.Interfaces.MainWindowServices;
 using R00ster.Services.Interfaces.Notifiers;
+using R00ster.Services.Interfaces.Other;
 using System.Diagnostics;
 
 namespace R00ster.Services.Realization.MainWindowServices
@@ -14,12 +16,14 @@ namespace R00ster.Services.Realization.MainWindowServices
         IJokesExcelReader _excelReader;
         IJokeDatabaseSaver _databaseBulkSaver;
         IEmailNotifier _emailNotifier;
+        IUnitOfWork _unitOfWork;
 
-        public MainWindowService(IJokesExcelReader excelReader, IJokeDatabaseSaver databaseBulkSaver, IEmailNotifier emailNotifier)
+        public MainWindowService(IUnitOfWork unitOfWork, IJokesExcelReader excelReader, IJokeDatabaseSaver databaseBulkSaver, IEmailNotifier emailNotifier)
         {
             _excelReader = excelReader;
             _databaseBulkSaver = databaseBulkSaver;
             _emailNotifier = emailNotifier;
+            _unitOfWork = unitOfWork;
         }
         /// <inheritdoc/>
         public async Task<int> ReadExcelFileWithDbSaveAsync(string pathToFile)
@@ -38,9 +42,14 @@ namespace R00ster.Services.Realization.MainWindowServices
         }
 
         /// <inheritdoc/>
-        public async Task SendEmailMessage(string userAddress, string subject, string body)
+        public async Task SendEmailMessage(string userAddress)
         {
-            await _emailNotifier.NotifyAsync(userAddress, subject, body);
+            var countResult = await _unitOfWork.JokesRepository.GetCountAsync();
+
+            await _emailNotifier.NotifyAsync(
+                userAddress
+                , "Daily report"
+                , $"Total row on {DateTime.Now} is {countResult}");
         }
     }
 }
