@@ -5,10 +5,13 @@ using R00ster.EF;
 using R00ster.Services.Interfaces.DatabaseSavers;
 using R00ster.Services.Interfaces.FileReaders;
 using R00ster.Services.Interfaces.MainWindowServices;
+using R00ster.Services.Interfaces.NetworkSender;
+using R00ster.Services.Interfaces.Notifiers;
 using R00ster.Services.Interfaces.Other;
 using R00ster.Services.Realization.DatabaseSavers;
 using R00ster.Services.Realization.FileReaders;
 using R00ster.Services.Realization.MainWindowServices;
+using R00ster.Services.Realization.Notifiers;
 using R00ster.Services.Realization.Other;
 using R00ster.ViewModels;
 
@@ -32,6 +35,8 @@ namespace R00ster.Helpers
             services.AddScoped<IMainWindowService, MainWindowService>();
             services.AddScoped<IJokesExcelReader, JokesExcelReader>();
             services.AddScoped<IJokeDatabaseSaver, JokeDatabaseSaver>();
+            services.AddScoped<IEmailNotifier, EmailNotifier>();
+            services.AddScoped<IEmailSender, EmailSender>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             //contexts
             services.AddDbContext<R00sterContext>(options =>

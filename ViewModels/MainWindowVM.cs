@@ -1,4 +1,5 @@
-﻿using R00ster.Commands;
+﻿using Microsoft.Extensions.Configuration;
+using R00ster.Commands;
 using R00ster.Services.Interfaces.MainWindowServices;
 using R00ster.Services.Interfaces.Other;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ namespace R00ster.ViewModels
     public class MainWindowVM : INotifyPropertyChanged
     {
         private const string ExcelFileFilter = "Excel files (*.xlsx)|*.xlsx";
+        private const string PathToUserEmail = "EmailSettings:UserEmail";
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -36,6 +38,7 @@ namespace R00ster.ViewModels
 
         //commands
         public ICommand ReadAndSaveExcelFileCommand { get; }
+        public ICommand NotifyByEmailCommand { get; }
 
 
         public MainWindowVM(IMainWindowService mainWindowService, IUnitOfWork unitOfWork)
@@ -46,6 +49,7 @@ namespace R00ster.ViewModels
             RefreshUIElementsAfterDbChanges();
 
             ReadAndSaveExcelFileCommand = new RelayCommand(async _ => await ReadAndSaveExcelFile());
+            NotifyByEmailCommand = new RelayCommand(async _ => await NotifyUser());
         }
 
 
@@ -78,6 +82,26 @@ namespace R00ster.ViewModels
                 {
                     RefreshUIElementsAfterDbChanges();
                 }
+            }
+        }
+
+        private async Task NotifyUser()
+        {
+            try
+            {
+                var countResult = await _unitOfWork.JokesRepository.GetCountAsync();
+
+                var userEmail = Program.Config.GetValue<string>(PathToUserEmail);
+
+                await _mainWindowService.SendEmailMessage(
+                    userEmail
+                    , "Daily report"
+                    , $"Total row on {DateTime.Now} is {countResult}");
+                MessageBox.Show($"Message was successfully delivered to Email {userEmail}. Check spam folder.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show($"Error occurred {ex.Message}", "Fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
