@@ -1,24 +1,24 @@
 ﻿using MailKit.Security;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
+using R00ster.Constants;
 using R00ster.Services.Interfaces.NetworkSender;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 namespace R00ster.Services.Realization.NetworkSender
 {
+    /// <summary>
+    /// Class that responsible for Sending an email message.
+    /// </summary>
     internal class EmailSender : IEmailSender
     {
-        private const string PathToEmailSender = "EmailSettings:SenderEmail";
-        private const string PathToEmailSenderPassword = "EmailSettings:SenderPassword";
-        private const string PathToEmailSmtpServer = "EmailSettings:SmtpServer";
-        private const string PathToEmailSmtpPort = "EmailSettings:PortNumber";
-
+        /// <inheritdoc/>
         public async Task SendAsync(MimeMessage? message)
         {
-            var senderAddress = Program.Config.GetValue<string>(PathToEmailSender);
-            var senderPassword = Program.Config.GetValue<string>(PathToEmailSenderPassword);
-            var smtpServerAddress = Program.Config.GetValue<string>(PathToEmailSmtpServer);
-            var smtpPortNumber = Program.Config.GetValue<int>(PathToEmailSmtpPort);
+            var senderAddress = Program.Config.GetValue<string>(SettingsPathConstants.PathToEmailSender);
+            var senderPassword = Program.Config.GetValue<string>(SettingsPathConstants.PathToEmailSenderPassword);
+            var smtpServerAddress = Program.Config.GetValue<string>(SettingsPathConstants.PathToEmailSmtpServer);
+            var smtpPortNumber = Program.Config.GetValue<int>(SettingsPathConstants.PathToEmailSmtpPort);
 
             using (var client = new SmtpClient())
             {

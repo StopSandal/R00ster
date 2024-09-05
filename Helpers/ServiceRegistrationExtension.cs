@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using R00ster.Constants;
 using R00ster.EF;
 using R00ster.Services.Interfaces.DatabaseSavers;
 using R00ster.Services.Interfaces.FileReaders;
@@ -24,8 +25,6 @@ namespace R00ster.Helpers
     /// </summary>
     internal static class ServiceRegistrationExtension
     {
-        private const string DatabaseConnectionPath = "DefaultConnection";
-
         /// <summary>
         /// Registers services, dependencies, database context for application.
         /// </summary>
@@ -43,7 +42,7 @@ namespace R00ster.Helpers
             //contexts
             services.AddDbContext<R00sterContext>(options =>
             {
-                options.UseSqlServer(Program.Config.GetConnectionString(DatabaseConnectionPath));
+                options.UseSqlServer(Program.Config.GetConnectionString(SettingsPathConstants.DatabaseConnectionPath));
             }, ServiceLifetime.Transient);
 
             //windows
@@ -58,6 +57,11 @@ namespace R00ster.Helpers
             return services;
         }
 
+        /// <summary>
+        /// Registers background services for process.
+        /// </summary>
+        /// <param name="services">A service collection</param>
+        /// <returns>Returns a service collection with registered services</returns>
         internal static IServiceCollection RegisterBackgroundServices(this IServiceCollection services)
         {
             services.AddHostedService<PeriodicTimeChecker>();

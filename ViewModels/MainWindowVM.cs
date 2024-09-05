@@ -89,6 +89,10 @@ namespace R00ster.ViewModels
             }
         }
 
+        /// <summary>
+        /// Send notification to user.
+        /// </summary>
+        /// <returns>Tsk representing asynchronous operation.</returns>
         private async Task NotifyUser()
         {
             try
@@ -104,11 +108,17 @@ namespace R00ster.ViewModels
                 MessageBox.Show($"Error occurred {ex.Message}", "Fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        /// <summary>
+        /// Makes On-start UI data updates.
+        /// </summary>
         private async void InitUI()
         {
             await RefreshUIElementsAfterDbChanges();
         }
+
+        /// <summary>
+        /// Adding application info to register.
+        /// </summary>
         private void SetOnBackgroundProcessStart()
         {
             if (StartupRegistryHelper.IsRegisteredInStartup())
@@ -120,6 +130,9 @@ namespace R00ster.ViewModels
             StartupRegistryHelper.RegisterInStartup();
         }
 
+        /// <summary>
+        /// Removing application info to register.
+        /// </summary>
         private void SetOffBackgroundProcessStart()
         {
             if (!StartupRegistryHelper.IsRegisteredInStartup())

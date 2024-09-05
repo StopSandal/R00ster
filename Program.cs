@@ -6,7 +6,7 @@ using R00ster.Helpers;
 namespace R00ster
 {
     /// <summary>
-    /// Initial application start class.
+    /// Initial application start class. Also starts background proccess.
     /// </summary>
     internal class Program
     {
