@@ -1,10 +1,10 @@
 ﻿using MailKit.Security;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
-using System.Net.Mail;
+using R00ster.Services.Interfaces.NetworkSender;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
-namespace R00ster.Services.Interfaces.NetworkSender
+namespace R00ster.Services.Realization.NetworkSender
 {
     internal class EmailSender : IEmailSender
     {

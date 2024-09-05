@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using R00ster.Services.Interfaces.DatabaseSavers;
+﻿using R00ster.Services.Interfaces.DatabaseSavers;
 using R00ster.Services.Interfaces.FileReaders;
 using R00ster.Services.Interfaces.MainWindowServices;
 using R00ster.Services.Interfaces.Notifiers;

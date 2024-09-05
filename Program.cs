@@ -28,7 +28,7 @@ namespace R00ster
                 })
                 .Build();
 
-            
+
             var backgroundService = host.Services.GetRequiredService<IHostedService>();
             backgroundService.StartAsync(default).GetAwaiter().GetResult();
 

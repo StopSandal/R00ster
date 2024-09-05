@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using R00ster.EF;
-using R00ster.Services.Interfaces.BackgroundServices;
 using R00ster.Services.Interfaces.DatabaseSavers;
 using R00ster.Services.Interfaces.FileReaders;
 using R00ster.Services.Interfaces.MainWindowServices;
@@ -13,6 +12,7 @@ using R00ster.Services.Realization.BackgroundServices;
 using R00ster.Services.Realization.DatabaseSavers;
 using R00ster.Services.Realization.FileReaders;
 using R00ster.Services.Realization.MainWindowServices;
+using R00ster.Services.Realization.NetworkSender;
 using R00ster.Services.Realization.Notifiers;
 using R00ster.Services.Realization.Other;
 using R00ster.ViewModels;
@@ -44,7 +44,7 @@ namespace R00ster.Helpers
             services.AddDbContext<R00sterContext>(options =>
             {
                 options.UseSqlServer(Program.Config.GetConnectionString(DatabaseConnectionPath));
-            },ServiceLifetime.Transient);
+            }, ServiceLifetime.Transient);
 
             //windows
             services.AddSingleton<MainWindow>();

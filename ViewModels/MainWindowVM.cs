@@ -99,7 +99,7 @@ namespace R00ster.ViewModels
 
                 MessageBox.Show($"Message was successfully delivered to Email {userEmail}. Check spam folder.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show($"Error occurred {ex.Message}", "Fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

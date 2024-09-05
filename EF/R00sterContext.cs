@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using R00ster.Entities;
-using System.IO;
 
 namespace R00ster.EF
 {

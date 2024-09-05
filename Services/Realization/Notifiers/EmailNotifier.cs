@@ -1,5 +1,4 @@
-﻿using MailKit.Security;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using MimeKit;
 using R00ster.Services.Interfaces.NetworkSender;
 using R00ster.Services.Interfaces.Notifiers;
@@ -10,7 +9,7 @@ namespace R00ster.Services.Realization.Notifiers
     internal class EmailNotifier : IEmailNotifier
     {
         private const string PathToEmailSender = "EmailSettings:SenderEmail";
-        
+
         private readonly IEmailSender _emailSender;
 
         public EmailNotifier(IEmailSender emailSender)

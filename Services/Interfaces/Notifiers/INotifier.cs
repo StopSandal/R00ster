@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace R00ster.Services.Interfaces.Notifiers
+﻿namespace R00ster.Services.Interfaces.Notifiers
 {
     internal interface INotifier
     {

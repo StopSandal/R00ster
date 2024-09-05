@@ -1,16 +1,8 @@
-﻿using ExcelDataReader.Log;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using R00ster.Constants;
 using R00ster.Services.Interfaces.BackgroundServices;
 using R00ster.Services.Interfaces.MainWindowServices;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace R00ster.Services.Realization.BackgroundServices
 {

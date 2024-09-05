@@ -1,5 +1,4 @@
-﻿using R00ster.Helpers;
-using System.Windows;
+﻿using System.Windows;
 
 namespace R00ster
 {
